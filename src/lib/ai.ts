@@ -28,7 +28,7 @@ async function run(model: string): Promise<z.infer<typeof promptSchema>> {
 
   const response = await groq.chat.completions.create({
     model,
-    temperature: 0.8,
+    temperature: 2,
     messages: [
       {
         role: 'system',
