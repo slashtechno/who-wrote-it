@@ -9,7 +9,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Lobby ID, response ID, and guessing player ID are required" }, { status: 400 });
     }
     
-    const guess = submitGuess(lobbyId, responseId, guessedPlayerId, guessingPlayerId);
+    const guess = await submitGuess(lobbyId, responseId, guessedPlayerId, guessingPlayerId);
     
     return NextResponse.json({ success: true, guess });
   } catch (error) {

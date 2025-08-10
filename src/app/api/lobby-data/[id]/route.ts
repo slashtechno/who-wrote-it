@@ -7,7 +7,7 @@ export async function GET(
 ) {
   try {
     const { id } = await params;
-    const lobby = getLobby(id);
+    const lobby = await getLobby(id);
     
     if (!lobby) {
       return NextResponse.json({ error: "Lobby not found" }, { status: 404 });

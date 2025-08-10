@@ -9,7 +9,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Lobby ID is required" }, { status: 400 });
     }
     
-    const gameState = resetGame(lobbyId);
+    const gameState = await resetGame(lobbyId);
     
     return NextResponse.json({ success: true, gameState });
   } catch (error) {

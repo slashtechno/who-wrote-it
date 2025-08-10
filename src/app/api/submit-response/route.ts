@@ -9,7 +9,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Lobby ID, player ID, and response text are required" }, { status: 400 });
     }
     
-    const response = submitResponse(lobbyId, playerId, responseText);
+    const response = await submitResponse(lobbyId, playerId, responseText);
     
     return NextResponse.json({ success: true, response });
   } catch (error) {
