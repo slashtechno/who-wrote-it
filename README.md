@@ -1,4 +1,6 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Who Wrote It?
+
+_Who Wrote It_ is a game where a lobby of players all get a prompt and have to respond to it. The twist, however, is that one player will not get a prompt and instead, the response to the prompt will be AI-generated
 
 ## Getting Started
 
