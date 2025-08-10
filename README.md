@@ -5,7 +5,7 @@ _Who Wrote It_ is a game where a lobby of players all get a prompt and have to r
 When all players have submitted their response to the prompt, players will need to match up the responses with the player names. They will have all the player names to choose from for the author, but also the otpion to choose AI as the author.
 
 
-## Getting Startedb
+## Getting Startedbai
 (this is the standard Next.JS stuff)
 
 First, run the development server:
