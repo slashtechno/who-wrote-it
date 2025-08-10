@@ -1,6 +1,8 @@
 # Who Wrote It?
 
-_Who Wrote It_ is a game where a lobby of players all get a prompt and have to respond to it. The twist, however, is that one player will not get a prompt and instead, the response to the prompt will be AI-generated
+_Who Wrote It_ is a game where a lobby of players all get a prompt and have to respond to it. The twist, however, is that one player will not get a prompt and instead will need to sit out. The response to the prompt will be AI-generated.
+
+When all players have submitted their response to the prompt, players will need to match up the responses with the player names. They will have all the player names to choose from for the author, but also the otpion to choose AI as the author.
 
 ## Getting Started
 

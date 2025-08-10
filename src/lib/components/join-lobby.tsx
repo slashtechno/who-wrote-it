@@ -2,12 +2,14 @@
 import { useState } from "react";
 import { toast } from "sonner";
 import { joinLobby } from "@/lib/api";
+import { useRouter } from "next/navigation";
 
 export default function JoinLobby() {
   const [joinForm, setJoinForm] = useState({
     joinCode: "",
     playerName: "",
   });
+  const router = useRouter();
   
   return (
     <div>
@@ -15,9 +17,28 @@ export default function JoinLobby() {
       try {
         const lobby = await joinLobby({
           joinCode: joinForm.joinCode,
+          playerName: joinForm.playerName,
         });
-        console.log(lobby);
-        toast.success("Joined lobby");
+        
+        // Find the current player in the lobby data
+        const currentPlayer = lobby.players.find(p => p.name === joinForm.playerName);
+        if (currentPlayer) {
+          localStorage.setItem(`currentPlayer_${lobby.id}`, currentPlayer.id);
+        }
+        
+        // Store lobby data for the lobby page
+        const lobbyData = {
+          id: lobby.id,
+          joinCode: lobby.joinCode,
+          players: lobby.players, // Backend now includes the new player
+        };
+        
+        localStorage.setItem(`lobby_${lobby.id}`, JSON.stringify(lobbyData));
+        
+        toast.success("Joined lobby successfully!");
+        
+        // Navigate to the lobby page
+        router.push(`/lobby/${lobby.id}`);
       } catch (error: any) {
         if (error.message === "Lobby not found") {
           toast.error("Lobby not found", {

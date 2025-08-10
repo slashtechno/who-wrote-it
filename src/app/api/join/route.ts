@@ -6,7 +6,7 @@ import { JoinLobbyRequest, JoinLobbyResponse, JoinLobbyApiResponse } from "@/lib
 export async function POST(request: NextRequest): Promise<NextResponse<JoinLobbyApiResponse>> {
   try {
     const body: JoinLobbyRequest = await request.json();
-    const lobby = joinLobby(body.joinCode);
+    const lobby = joinLobby(body.joinCode, body.playerName);
     return NextResponse.json(lobby);
   } catch (error: any) {
     if (error.message === "Lobby not found") {

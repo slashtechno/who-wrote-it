@@ -2,27 +2,45 @@
 import { useState } from "react";
 import { toast } from "sonner";
 import { createLobby } from "@/lib/api";
+import { useRouter } from "next/navigation";
 
 export default function CreateLobby() {
   const [createForm, setCreateForm] = useState({
     playerName: "",
   });
+  const router = useRouter();
   
   return (
     <div>
       <form onSubmit={async (e) => {
         e.preventDefault();
         try {
-          // Now you get full IntelliSense here!
           const lobby = await createLobby({
             playerName: createForm.playerName,
           });
           
-          console.log(lobby);
-          // TypeScript knows lobby has: id, joinCode
-          console.log(`Created lobby ${lobby.id} with join code ${lobby.joinCode}`);
+          // Find the current player in the lobby data (use backend-generated ID)
+          const currentPlayer = lobby.players.find(p => p.name === createForm.playerName);
+          if (!currentPlayer) {
+            throw new Error("Failed to create player");
+          }
           
-          toast.success("Lobby created");
+          // Store lobby data for the lobby page
+          const lobbyData = {
+            id: lobby.id,
+            joinCode: lobby.joinCode,
+            players: lobby.players
+          };
+          
+          localStorage.setItem(`lobby_${lobby.id}`, JSON.stringify(lobbyData));
+          localStorage.setItem(`currentPlayer_${lobby.id}`, currentPlayer.id);
+          
+          toast.success("Lobby created successfully!", {
+            description: `Join code: ${lobby.joinCode}`
+          });
+          
+          // Navigate to the lobby page
+          router.push(`/lobby/${lobby.id}`);
         } catch (error: any) {
           toast.error("Failed to create lobby", {
             description: error.message || "Unknown error occurred"
